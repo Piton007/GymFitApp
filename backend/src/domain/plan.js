@@ -1,0 +1,55 @@
+import { DataTypes, Model } from "sequelize";
+import Gimmnasio from "./gimnasio"
+
+class Plan extends Model {
+	static TABLE_NAME = "planes";
+}
+
+function modelBuilder(dbContext) {
+	Plan.init(
+		{
+			name: {
+				type: DataTypes.STRING,
+				validate: {
+					len: [0, 20],
+				},
+			},
+			descripcion:{
+				type:DataTypes.STRING,
+				validate:{
+					len:[0,100]
+				}
+			},
+			precio:{
+				type:DataTypes.DECIMAL,
+				validate:{
+					isDecimal:true
+				}
+
+			},
+			cantidad:{
+				type:DataTypes.INTEGER,
+				defaultValue:0
+			}
+		},
+		{
+			sequelize: dbContext,
+			modelName: Plan.TABLE_NAME,
+		}
+	);
+	
+	Plan.prototype.isAvailable = function(){
+		return this.cantidad > 0
+	}
+	setUpRelations()
+	
+}
+
+function setUpRelations(){
+    Gimmnasio.hasMany(Plan)
+    Plan.belongsTo(Gimmnasio,{onDelete:'CASCADE'})
+}
+
+export default Plan
+export {modelBuilder as init}
+
