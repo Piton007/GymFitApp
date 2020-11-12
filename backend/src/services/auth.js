@@ -1,4 +1,3 @@
-import  Repository from "../domain/index"
 import {Deportista as Mapper} from "../shared/mappers"
 
 class AuthDeportistaService {
@@ -7,12 +6,12 @@ class AuthDeportistaService {
         this.mapper = mapper
     } 
     login(email){
-        const auth = Repository.Deportista.findOne({
+        const auth = this.repository.Deportista.findOne({
             where:{
                 email
             }
         })
-        if (auth) return Mapper.mapperToDTO(auth)
+        if (auth) return Mapper.Deportista.mapperToDTO(auth)
         throw new Error("Deportista Not Found")
     }
 }
@@ -23,12 +22,12 @@ class AuthGimnasioService {
         this.mapper = mapper
     } 
     login(email){
-        const auth = Repository.Gimnasio.findOne({
+        const auth = this.repository.Gimnasio.findOne({
             where:{
                 email
             }
         })
-        if (auth) return Mapper.mapperToDTO(auth)
+        if (auth) return Mapper.Gimnasio.mapperToDTO(auth)
         throw new Error("Gimnasio Not Found")
     }
 }

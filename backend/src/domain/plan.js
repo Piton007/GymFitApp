@@ -20,6 +20,12 @@ function modelBuilder(dbContext) {
 					len:[0,100]
 				}
 			},
+			periodo:{
+				type:DataTypes.INTEGER,
+				validate:{
+					min:1
+				}
+			},
 			precio:{
 				type:DataTypes.DECIMAL,
 				validate:{

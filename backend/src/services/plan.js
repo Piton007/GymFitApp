@@ -6,8 +6,8 @@ export default class PlanService  {
         this.repository = repository
     }
 
-    create(gimnasioId){
-        const plan = await this.repository.Plan.create({gimnasioId})
+    create(dto){
+        const plan = await this.repository.Plan.create(...dto)
         return {id:plan.id}
        
     }
@@ -26,7 +26,7 @@ export default class PlanService  {
                 gimnasioId
             }
         })
-       return Planes.map(x=>this.mapper.mapperToDTO(x))
+       return Planes.map(x=>this.mapper.Plan.mapperToDTO(x))
     }
 
 }

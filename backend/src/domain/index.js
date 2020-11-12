@@ -9,6 +9,13 @@ const DB = {
     Plan,
     Suscripcion  
 }
+function buildDB(context){
+    DeportistaBuilder(context)
+    GimnasioBuilder(context)
+    PlanBuilder(context)
+    SuscripcionBuilder(context)
+} 
+
 const Builder = {
     Deportista:DeportistaBuilder,
     Gimnasio:GimnasioBuilder,
@@ -18,4 +25,4 @@ const Builder = {
 
 
 export default DB
-export {Builder}
+export {buildDB as Migrations}

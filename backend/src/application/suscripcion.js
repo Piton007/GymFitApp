@@ -1,10 +1,21 @@
-import {Router as router} from "express"
+import { Router as router} from "express"
 import {body,validationResult} from "express-validator"
+import {query} from "express-validator/check"
 
-class Router {
+export default class Router {
     constructor(service){
         this.service = service
         this.router = router()
+        this.getAll()
+        this.create()
+        this.delete()
+    }
+    getAll(){
+        this.router.get("/",[query('deportista','Introduzca un id valido').isInt()],function(req,res){
+            const errors  = validationResult(req)
+            if(!errors.isEmpty()) res.status(400).send({errors:errors.array()})
+            res.status(200).send(await this.service.findAll(req.query.deportista))
+        })
     }
     create(){
         this.router.post("/",[
@@ -32,4 +43,5 @@ class Router {
             } else res.status(400).send({errors:'El campo id es obligatorio'})
         })
     }
+   
 }

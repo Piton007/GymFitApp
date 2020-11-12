@@ -35,7 +35,7 @@ export default class SuscripcionService  {
                 }
             ]
         })
-       return suscripciones.map(x=>this.mapper.mapperToDTO(x))
+       return suscripciones.map(x=>this.mapper.Suscripcion.mapperToDTO(x))
     }
 
   
