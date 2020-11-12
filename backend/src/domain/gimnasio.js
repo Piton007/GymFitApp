@@ -1,10 +1,10 @@
 import { DataTypes, Model } from "sequelize";
 
+const TABLE_NAME = "gimnasios";
 class Gimnasio extends Model {
-	static TABLE_NAME = "gimnasios";
+	
 }
-
-function modelBuilder(dbContext) {
+function connect(dbContext){
 	Gimnasio.init(
 		{
 			name: {
@@ -31,9 +31,13 @@ function modelBuilder(dbContext) {
 		},
 		{
 			sequelize: dbContext,
-			modelName: Gimnasio.TABLE_NAME,
+			modelName: TABLE_NAME,
 		}
 	);
 }
+function modelBuilder(dbContext) {
+	connect(dbContext)
+	return Gimnasio.sync()
+}
 export default Gimnasio
-export {modelBuilder as init}
+export {modelBuilder as init,connect}

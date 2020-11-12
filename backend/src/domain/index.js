@@ -1,7 +1,7 @@
-import Deportista,{init as DeportistaBuilder} from  "./deportista"
-import Gimnasio, {init as GimnasioBuilder} from "./gimnasio"
-import Plan, {init as PlanBuilder} from "./plan"
-import Suscripcion, {init as SuscripcionBuilder} from "./suscripcion"
+import Deportista,{init as DeportistaBuilder,connect as DeportistaConnection} from  "./deportista"
+import Gimnasio, {init as GimnasioBuilder, connect as GimnasioConnection} from "./gimnasio"
+import Plan, {init as PlanBuilder, connect as PlanConnection} from "./plan"
+import Suscripcion, {init as SuscripcionBuilder, connect as SuscripcionConnection} from "./suscripcion"
 
 const DB = {
     Deportista,
@@ -10,19 +10,22 @@ const DB = {
     Suscripcion  
 }
 function buildDB(context){
-    DeportistaBuilder(context)
-    GimnasioBuilder(context)
-    PlanBuilder(context)
-    SuscripcionBuilder(context)
+    return Promise.all([DeportistaBuilder(context),
+        GimnasioBuilder(context),
+        PlanBuilder(context),
+        SuscripcionBuilder(context)])
+    
+    
+    
 } 
+function connect(context){
+    DeportistaConnection(context)
+    GimnasioConnection(context)
+    PlanConnection(context)
+    SuscripcionConnection(context)
+}
 
-const Builder = {
-    Deportista:DeportistaBuilder,
-    Gimnasio:GimnasioBuilder,
-    Plan:PlanBuilder,
-    Suscripcion:SuscripcionBuilder
-} 
 
 
 export default DB
-export {buildDB as Migrations}
+export {buildDB as Migrations,connect}

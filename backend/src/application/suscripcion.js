@@ -1,6 +1,6 @@
 import { Router as router} from "express"
-import {body,validationResult} from "express-validator"
-import {query} from "express-validator/check"
+import {body,validationResult,query} from "express-validator"
+
 
 export default class Router {
     constructor(service){
@@ -10,18 +10,18 @@ export default class Router {
         this.create()
         this.delete()
     }
-    getAll(){
-        this.router.get("/",[query('deportista','Introduzca un id valido').isInt()],function(req,res){
+    async getAll(){
+        this.router.get("/",[query('deportista','Introduzca un id valido').isInt()],async function(req,res){
             const errors  = validationResult(req)
             if(!errors.isEmpty()) res.status(400).send({errors:errors.array()})
             res.status(200).send(await this.service.findAll(req.query.deportista))
         })
     }
-    create(){
+    async create(){
         this.router.post("/",[
             body('plan_id').notEmpty().toInt(),
             body('deportista_id').notEmpty().toInt()
-        ],function(req,res){
+        ],async function(req,res){
             try {
                 const errors = validationResult(req)
                 if (!errors.isEmpty()){
@@ -35,8 +35,8 @@ export default class Router {
             }
         })
     }
-    delete(){
-        this.router.delete("/:id",function(req,res){
+    async delete(){
+        this.router.delete("/:id",async function(req,res){
             if (req.params.id){
                 await this.service.delete(req.params.id)
                 res.status(200).send({data:{id},message:'Se ha desuscrito con exito',errors:[] })

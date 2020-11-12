@@ -1,3 +1,5 @@
+import Repository from "../domain/index"
+
 export default class GimnasioService {
 	constructor(repository, mapper) {
 		this.mapper = mapper;
@@ -13,7 +15,7 @@ export default class GimnasioService {
 	}
 
 	async getAll() {
-		const gimnasios = await this.repository.Gimnasio.findAll();
+        const gimnasios = await this.repository.Gimnasio.findAll();
         return gimnasios.map(this.mapper.Gimnasio.mapperToDTO)
 	}
 

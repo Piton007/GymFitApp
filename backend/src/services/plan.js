@@ -6,13 +6,13 @@ export default class PlanService  {
         this.repository = repository
     }
 
-    create(dto){
+    async create(dto){
         const plan = await this.repository.Plan.create(...dto)
         return {id:plan.id}
        
     }
 
-    delete(planId){
+    async delete(planId){
         const plan = await this.repository.Plan.findByPk(planId)
         if (plan){
             await plan.destroy()
@@ -20,7 +20,7 @@ export default class PlanService  {
         throw new Error("Plan Not Found")
     }
 
-    findAll(gimnasioId){
+    async findAll(gimnasioId){
         const Planes =  await this.repository.Plan.findAll({
             where:{
                 gimnasioId

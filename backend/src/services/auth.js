@@ -5,8 +5,8 @@ class AuthDeportistaService {
         this.repository = repository
         this.mapper = mapper
     } 
-    login(email){
-        const auth = this.repository.Deportista.findOne({
+    async login(email){
+        const auth = await this.repository.Deportista.findOne({
             where:{
                 email
             }
@@ -21,8 +21,8 @@ class AuthGimnasioService {
         this.repository = repository
         this.mapper = mapper
     } 
-    login(email){
-        const auth = this.repository.Gimnasio.findOne({
+    async login(email){
+        const auth = await this.repository.Gimnasio.findOne({
             where:{
                 email
             }

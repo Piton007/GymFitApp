@@ -6,8 +6,8 @@ export default class Router {
         this.router = router()
         this.getAll()
     }
-    getAll(){
-        this.router.get("/",function(req,res){
+    async getAll(){
+        this.router.get("/",async (req,res)=>{
             res.status(200).send(await this.service.getAll())
         })
     }

@@ -9,8 +9,8 @@ class AuthDeportistaRouter {
         this.login()
     }
     login(){
-        this.router.get("/login",[body('email','Introduzca un email valido').isEmail().normalizeEmail()
-    ],function(req,res){
+        this.router.post("/login",[body('email','Introduzca un email valido').isEmail().normalizeEmail()
+    ],async function(req,res){
             const errors  = validationResult(req)
             if(!errors.isEmpty()) res.status(400).send({errors:errors.array()})
             res.status(200).send(await this.service.login(req.body.email))
@@ -27,8 +27,8 @@ class AuthGimnasioRouter {
         this.login()
     }
     login(){
-        this.router.get("/login",[body('email','Introduzca un email valido').isEmail().normalizeEmail()
-    ],function(req,res){
+        this.router.post("/login",[body('email','Introduzca un email valido').isEmail().normalizeEmail()
+    ],async function(req,res){
             const errors  = validationResult(req)
             if(!errors.isEmpty()) res.status(400).send({errors:errors.array()})
             res.status(200).send(await this.service.login(req.body.email))

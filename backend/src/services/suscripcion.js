@@ -6,7 +6,7 @@ export default class SuscripcionService  {
         this.repository = repository
     }
 
-    create(deportistaId,planId){
+    async create(deportistaId,planId){
         const plan = await this.repository.Plan.findByPk(planId)
         if (plan.isAvailable()){
             const suscription = await this.repository.Suscripcion.create({deportistaId,planId})
@@ -15,7 +15,7 @@ export default class SuscripcionService  {
         }else throw new Error('This Plan is not available')
     }
 
-    delete(suscriptionId){
+    async delete(suscriptionId){
         const suscription = await this.repository.Suscripcion.findByPk(suscriptionId)
         if (suscription){
             await suscription.destroy()
@@ -23,7 +23,7 @@ export default class SuscripcionService  {
         throw new Error("Suscription Not Found")
     }
 
-    findAll(deportistaId){
+    async findAll(deportistaId){
         const suscripciones =  await this.repository.Suscripcion.findAll({
             where:{
                 deportistaId

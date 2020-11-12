@@ -1,10 +1,10 @@
 import { DataTypes, Model } from "sequelize";
 
+const TABLE_NAME = "deportistas";
 class Deportista extends Model {
-	static TABLE_NAME = "users";
+	
 }
-
-function modelBuilder(dbContext) {
+function connect(dbContext){
 	Deportista.init(
 		{
 			name: {
@@ -22,9 +22,13 @@ function modelBuilder(dbContext) {
 		},
 		{
 			sequelize: dbContext,
-			modelName: Deportista.TABLE_NAME,
+			modelName: TABLE_NAME,
 		}
 	);
 }
+function modelBuilder(dbContext) {
+	connect(dbContext)
+	return Deportista.sync()
+}
 export default Deportista 
-export {modelBuilder as init}
+export {modelBuilder as init,connect}
