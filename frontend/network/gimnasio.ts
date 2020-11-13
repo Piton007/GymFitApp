@@ -4,10 +4,13 @@ import ApiResp from "./dto";
 export interface GimnasioDTO{
     id:number,
     name:string,
-    email:string
+    email:string,
+    latitud:string,
+    longitud:string,
+    direccion:string
 }
 
-export function getAll():Promise<ApiResp<GimnasioDTO>>{
+export function getAll():Promise<ApiResp<GimnasioDTO[]>>{
     return fetch(`${API_URL}/gimnasios`,{
         method:'GET',
         ...headers

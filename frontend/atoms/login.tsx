@@ -4,8 +4,9 @@ import {TextInput} from 'react-native-paper';
 import {Deportista as API} from '../network/auth';
 import AsyncStorage from '@react-native-community/async-storage';
 import {CommonActions, useNavigation} from '@react-navigation/native';
+import { DEPORTISTA_KEY } from '../global';
 
-const DEPORTISTA_KEY = '@Store:deportista';
+
 
 const resetAction= CommonActions.reset({
     index: 0,
