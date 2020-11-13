@@ -7,6 +7,7 @@ export interface PlanDTO {
     descripcion:string,
     duracion:number,
     precio:number,
+    cantidad:number,
     available:boolean
 }
 

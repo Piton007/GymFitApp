@@ -3,6 +3,8 @@ import {View, Text, Alert} from 'react-native';
 import React, {createContext, useContext, useEffect} from 'react';
 import Gimnasios from './molecules/gimnasios';
 import Home from "./molecules/deportistaHome"
+import GimnasioPerfil from "./molecules/gimnasioHome"
+import Planes from "./molecules/planes"
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import { MyContext } from './global';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -39,23 +41,51 @@ const Entrenamiento = ({navigation}:any) => {
 
 
 
-export default function () {
+function DeportistaHome () {
   const navigation = useNavigation();
   return (
     <MyContext.Provider value={navigation}>
-      <Tab.Navigator initialRouteName="Home" activeColor="#F5851B"
+      <Tab.Navigator initialRouteName="DeportistaPerfil" activeColor="#F5851B"
          barStyle={{backgroundColor:'#3C3F3F'}} >
-        <Tab.Screen name="Home" options={{tabBarIcon:({ color }) => (
+        <Tab.Screen name="DeportistaPerfil" options={{tabBarIcon:({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
           )}} component={Home} />
-        <Tab.Screen name="Gyms" options={{tabBarIcon:({ color }) => (
+        <Tab.Screen name="DeportistaGyms" options={{tabBarIcon:({ color }) => (
             <MaterialCommunityIcons name="weight" color={color} size={26} />
           )}} component={Gimnasios} />
-        <Tab.Screen name="Entrenamiento"  options={{tabBarIcon:({ color }) => (
+        <Tab.Screen name="DeportistaEntrenamiento"  options={{tabBarIcon:({ color }) => (
             <MaterialCommunityIcons name="karate" color={color} size={26} />
           )}} component={Entrenamiento} />
         
       </Tab.Navigator>
     </MyContext.Provider>
   );
+}
+
+
+function GimnasioHome () {
+  const navigation = useNavigation();
+  
+  return (
+    <MyContext.Provider value={navigation}>
+      <Tab.Navigator initialRouteName="GimnasioPerfil" activeColor="#F5851B"
+         barStyle={{backgroundColor:'#3C3F3F'}} >
+        <Tab.Screen name="GimnasioPerfil" options={{tabBarIcon:({ color }) => (
+            <MaterialCommunityIcons name="home" color={color} size={26} />
+          ),title:"Home"}} component={GimnasioPerfil} />
+        <Tab.Screen name="GimnasioPlanes" options={{tabBarIcon:({ color }) => (
+            <MaterialCommunityIcons name="cards" color={color} size={26} />
+          ),title:"Planes"}} component={Planes} />
+        <Tab.Screen name="GimnasioConfiguracion"  options={{tabBarIcon:({ color }) => (
+            <MaterialCommunityIcons name="wrench" color={color} size={26} />
+          ),title:"Configuracion"}} component={Entrenamiento} />
+        
+      </Tab.Navigator>
+    </MyContext.Provider>
+  );
+}
+
+export default {
+  Deportista:DeportistaHome,
+  Gimnasio:GimnasioHome
 }

@@ -42,6 +42,7 @@ export default function({navigation}:any){
         })
         }
         return ()=>{
+           
             suscribe = false
         }
          
