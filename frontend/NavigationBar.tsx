@@ -49,13 +49,13 @@ function DeportistaHome () {
          barStyle={{backgroundColor:'#3C3F3F'}} >
         <Tab.Screen name="DeportistaPerfil" options={{tabBarIcon:({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
-          )}} component={Home} />
+          ),title:"Home"}} component={Home} />
         <Tab.Screen name="DeportistaGyms" options={{tabBarIcon:({ color }) => (
             <MaterialCommunityIcons name="weight" color={color} size={26} />
-          )}} component={Gimnasios} />
+          ),title:"Gyms"}} component={Gimnasios} />
         <Tab.Screen name="DeportistaEntrenamiento"  options={{tabBarIcon:({ color }) => (
             <MaterialCommunityIcons name="karate" color={color} size={26} />
-          )}} component={Entrenamiento} />
+          ),title:"Entrenamiento"}} component={Entrenamiento} />
         
       </Tab.Navigator>
     </MyContext.Provider>

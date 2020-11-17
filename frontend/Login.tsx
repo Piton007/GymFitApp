@@ -1,8 +1,10 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {Alert, Button, StyleSheet, Text, View} from 'react-native';
+import {Alert, Button, StyleSheet,  View} from 'react-native';
+import {Text} from "react-native-paper"
 import {SafeAreaView} from 'react-native-safe-area-context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { GymFitButton } from './atoms/Buttons';
 
 const Separator = () => <View style={styles.separator} />;
 
@@ -17,22 +19,26 @@ export default function Login() {
       <Separator />
       <View style={styles.actions}>
         <View style={{width: 200, height: 'auto'}}>
-          <Button
-            title="Gimnasio"
+          <GymFitButton
+            
             onPress={() => {
               navigation.navigate('GymLogin');
             }}
-          />
+          >
+            Gimnasio
+          </GymFitButton>
         </View>
       </View>
       <View style={styles.actions}>
         <View style={{width: 200, height: 'auto'}}>
-          <Button
-            title="Deportista"
+          <GymFitButton
+           
             onPress={() => {
               navigation.navigate('DeportistaLogin');
             }}
-          />
+          >
+            Deportista
+          </GymFitButton>
         </View>
       </View>
     </SafeAreaView>

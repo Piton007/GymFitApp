@@ -20,6 +20,7 @@ export default function(props:SuscripcionViewModel){
                 <List.Item style={{marginVertical:2}} title="Periodo"  left={props => <List.Icon {...props} icon="calendar" />} description={`${props.duracion} meses`}/>
                 
             </Card.Content>
+            
         </Card>
     )
 }

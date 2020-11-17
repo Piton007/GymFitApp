@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
-import {Alert, Button, View} from 'react-native';
-import {TextInput} from 'react-native-paper';
+import {Alert, Text, View} from 'react-native';
+import {TextInput,Button} from 'react-native-paper';
+import Input from "./Textfield"
 import {Gimnasio as API} from '../network/auth';
 import AsyncStorage from '@react-native-community/async-storage';
 import {CommonActions, useNavigation} from '@react-navigation/native';
 import { GYM_KEY } from '../global';
+import { GymFitButton } from './Buttons';
+
 
 
 
@@ -30,10 +33,9 @@ export default function Deportista() {
 
   return (
     <View style={{flex:1,justifyContent:"center"}}>
-      <View style={{marginVertical: 16}}>
-        <TextInput
+      <View style={{marginVertical: 16,justifyContent:'center',alignItems:'center'}}>
+        <Input
           label="Email"
-         
           autoFocus
           onChangeText={(text: string) => {
             setEmail(text);
@@ -41,11 +43,16 @@ export default function Deportista() {
           value={email}
         />
       </View>
-      <Button
-        title="Login"
+      <View style={{justifyContent:'center',alignItems:'center'}}>
+      <GymFitButton
+        
         onPress={() => {
           login();
-        }}></Button>
+        }}>
+            Login
+        </GymFitButton>
+      </View>
+      
     </View>
   );
 }

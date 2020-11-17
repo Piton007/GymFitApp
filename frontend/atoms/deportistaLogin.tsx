@@ -11,7 +11,7 @@ import { DEPORTISTA_KEY } from '../global';
 const resetAction= CommonActions.reset({
     index: 0,
     routes: [
-      { name: 'Home' }
+      { name: 'DeportistaHome' }
     ],
   })
 export default function Deportista() {
