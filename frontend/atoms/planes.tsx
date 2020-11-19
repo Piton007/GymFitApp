@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {TouchableOpacity, View, Text} from 'react-native';
 import {Avatar, Card, List} from 'react-native-paper';
+
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { MyContext } from '../global';
 
 export interface PlanViewModel {
   periodo: string;
@@ -34,6 +36,7 @@ function DeleteView({onPress}: any) {
 
 export default function ({data, deleteAction}: PlanProps) {
   const [displayInfo, setDisplayInfo] = useState(false);
+
 
   function moreInfo() {
     if (displayInfo) {

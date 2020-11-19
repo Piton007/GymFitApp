@@ -10,15 +10,15 @@ interface Props extends Partial<TextInputProps>{
 }
 
 
-export default function ({suffix,prefix,...props}:Props) {
+export default function ({suffix,prefix,style,...props}:Props) {
   return (
     <TextInput
       {...props}
       left={(prefix) ? <TextInput.Affix text={prefix} textStyle={styles.prefix}/>:null}
       right={(suffix) ? <TextInput.Affix text={suffix}/>:null}
       theme={{colors: {primary: PRIMARY_COLOR}}}
-      style={styles.input}
-      autoFocus
+      style={ Object.assign({},styles.input,style)}
+      autoFocus ={props.autoFocus}
       placeholderTextColor={PRIMARY_COLOR}
     />
   );

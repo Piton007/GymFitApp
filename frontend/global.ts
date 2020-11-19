@@ -1,3 +1,4 @@
+import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { createContext } from "react";
 
 export const MyContext = createContext<any>({});

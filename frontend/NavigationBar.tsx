@@ -5,6 +5,7 @@ import Gimnasios from './molecules/gimnasios';
 import Home from "./molecules/deportistaHome"
 import GimnasioPerfil from "./molecules/gimnasioHome"
 import Planes from "./molecules/planes"
+import {GimnasioPlanHeader as Header} from "./atoms"
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import { MyContext } from './global';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -24,12 +25,14 @@ const Entrenamiento = ({navigation}:any) => {
     let suscribe = true
     if(suscribe){
       navigation.addListener('focus',()=>{
-        navigationHeader.setOptions({
-          title:'Entrenamiento'
+        navigationHeader?.setOptions({
+          headerTitle:'Entrenamiento'
       })
     })
   }
-    
+    return ()=>{
+      suscribe  = false
+    }
      
  },[])
  return (
@@ -71,7 +74,7 @@ function GimnasioHome () {
       <Tab.Navigator initialRouteName="GimnasioPerfil" activeColor="#F5851B"
          barStyle={{backgroundColor:'#3C3F3F'}} >
         <Tab.Screen name="GimnasioPerfil" options={{tabBarIcon:({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
+            <MaterialCommunityIcons name="home"  color={color} size={26} />
           ),title:"Home"}} component={GimnasioPerfil} />
         <Tab.Screen name="GimnasioPlanes" options={{tabBarIcon:({ color }) => (
             <MaterialCommunityIcons name="cards" color={color} size={26} />

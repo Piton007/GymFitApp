@@ -23,7 +23,7 @@ export default function({navigation}:any){
     function logOut(){
         
         AsyncStorage.removeItem(GYM_KEY).then(() => {
-            navigationHeader.navigate('Principal')
+            navigationHeader?.navigate('Principal')
            
          }); 
     }
@@ -39,8 +39,8 @@ export default function({navigation}:any){
             
           }); 
           navigation.addListener('focus',()=>{
-              navigationHeader.setOptions({
-                title:'Mi Gimnasio'
+              navigationHeader?.setOptions({
+                headerTitle:'Mi Gimnasio'
             })
         })
         }

@@ -20,14 +20,21 @@ export interface CreatePlanDTO{
     descripcion:string
 }
 
+export function getAll():Promise<ApiResp<number>>{
+    return fetch(`${API_URL}/planes`,{
+        method:'GET',
+        ...headers   
+    }).then(x=>x.json())
+}
+
 export function deletePlan(planId:number):Promise<ApiResp<number>>{
-    return fetch(`${API_URL}/gimnasios/${planId}`,{
+    return fetch(`${API_URL}/planes/${planId}`,{
         method:'DELETE',
         ...headers   
     }).then(x=>x.json())
 }
 export function createPlan(plan:CreatePlanDTO):Promise<ApiResp<number>>{
-    return fetch(`${API_URL}/gimnasios`,{
+    return fetch(`${API_URL}/planes`,{
         method:'POST',
         ...headers,
         body:JSON.stringify({

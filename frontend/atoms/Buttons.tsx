@@ -7,7 +7,7 @@ export function GymFitButton(props:any){
  
 
     return(
-        <Button labelStyle={{color:'#FFFFFF'}} theme={{colors:{primary:'#3C3F3F'}}} {...props}style={{width:200,backgroundColor:'#3C3F3F'}}/>
+        <Button labelStyle={{color:'#FFFFFF'}} theme={{colors:{primary:'#3C3F3F'}}} {...props}style={ Object.assign({},{width:200,backgroundColor:'#3C3F3F'},props.style) }/>
           
        
 
