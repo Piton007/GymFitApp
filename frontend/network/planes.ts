@@ -8,7 +8,7 @@ export interface PlanDTO {
     duracion:number,
     precio:number,
     cantidad:number,
-    available:boolean
+    availability:boolean
 }
 
 export interface CreatePlanDTO{

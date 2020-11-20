@@ -14,7 +14,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 
 function buildViewModel(plan:PlanDTO):PlanViewModel{
     return {
-        disponibilidad:plan.available,
+        disponibilidad:plan.availability,
         descripcion:plan.descripcion,
         periodo:plan.duracion+" meses",
         name:plan.name || "Standard",

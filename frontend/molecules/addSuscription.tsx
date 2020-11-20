@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react"
-import { ImageBackground as Image, Platform, StyleSheet, View } from "react-native"
+import { Alert, ImageBackground as Image, Platform,  StyleSheet, View } from "react-native"
 import { ScrollView } from "react-native-gesture-handler";
-import { Text } from "react-native-paper";
+import { Divider, List, Text } from "react-native-paper";
+import Plan from "./planesNavigate"
 import { getByIdAndPopulatePlans, GimnasioDTO } from "../network/gimnasio";
+import { NavigationProp, ParamListBase, Route, useNavigation} from "@react-navigation/native"
 
  interface GimnasioViewModel{
     gimnasioId:number,
@@ -20,11 +22,12 @@ import { getByIdAndPopulatePlans, GimnasioDTO } from "../network/gimnasio";
     duracion:number,
     precio:number,
     cantidad:number,
-    available:boolean
+    availability:boolean
 }
 
-interface Props {
-    id:number
+interface Params {
+    id : number,
+    name:string
 }
 
 const nullable:GimnasioViewModel = {
@@ -40,18 +43,44 @@ const nullable:GimnasioViewModel = {
 function assembleGymViewModel(gym:GimnasioDTO):GimnasioViewModel{
     return { ...gym,gimnasioId:gym.id}
 }
+interface Props {
+    route:Route<string, Params | undefined>
+    navigation:NavigationProp<ParamListBase>
+}
 
 
-export default function({id}:Props){
+export default function({route}:Props){
+    const {id,name} = route.params as Params
+    const navigationHeader = useNavigation()
     const [gym,setGym] = useState<GimnasioViewModel>(nullable)
 
+    function renderPlans(){
+        return (
+            <View>
+                <Text style={{fontSize:20,margin:10}}>Planes</Text>
+                {gym.planes.map(x=>(
+            <View key={x.id}>
+                <Plan {...x} />
+                <Divider />
+            </View>))}
+            </View>
+        )
+
+    }
 
     useEffect(()=>{
         let suscribe = true
         if(suscribe){
+            navigationHeader.setOptions({
+                title:name,
+                headerTransparent:true,
+               
+            })
             getByIdAndPopulatePlans(id)
             .then((x)=>{
-                if (x.data) setGym(assembleGymViewModel(x.data))
+                if (x.data) {
+                    setGym(assembleGymViewModel(x.data))
+                }
                 
             })
         }
@@ -64,6 +93,7 @@ export default function({id}:Props){
             <Text>
                 Descripcion: Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione illo saepe dolorum. Natus labore tempora quia id autem placeat eaque, explicabo vitae iusto quod sint aliquam sit, sunt mollitia incidunt.
             </Text>
+            {renderPlans()}
         </ScrollView>
         
     )

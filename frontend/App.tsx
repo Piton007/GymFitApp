@@ -14,7 +14,7 @@ import CreatePlan from "./organism/plan"
 import DeportistaLogin from "./atoms/deportistaLogin"
 import GymLogin from "./atoms/gimnasioLogin"
 import BottomNavigationBar from "./NavigationBar"
-import AddSuscription from "./organism/suscription"
+import AddSuscription from "./molecules/addSuscription"
 import {
   SafeAreaView,
   StyleSheet

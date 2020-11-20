@@ -9,6 +9,7 @@ import { MyContext } from "../global";
 
 function buildViewModel(gimnasio:GimnasioDTO):GimnasioViewModel{
     return {
+        id:gimnasio.id,
         email:gimnasio.email,
         nombre:gimnasio.name,
         direccion:gimnasio.direccion
