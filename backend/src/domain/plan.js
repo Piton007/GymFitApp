@@ -2,7 +2,11 @@ import { DataTypes, Model } from "sequelize";
 import Gimmnasio from "./gimnasio";
 
 const TABLE_NAME = "plans";
-class Plan extends Model {}
+class Plan extends Model {
+
+
+
+}
 function connect(dbContext) {
 	Plan.init(
 		{
@@ -46,15 +50,12 @@ function connect(dbContext) {
 	};
 	setUpRelations();
 }
-function modelBuilder(dbContext) {
-	connect(dbContext);
 
-	return Plan.sync();
-}
 
 function setUpRelations() {
+	Gimmnasio.hasMany(Plan)
 	Plan.belongsTo(Gimmnasio, { onDelete: "CASCADE" });
 }
 
 export default Plan;
-export { modelBuilder as init,connect };
+export {connect };

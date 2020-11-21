@@ -9,15 +9,11 @@ function connect(dbContext){
 		{
 			name: {
 				type: DataTypes.STRING,
-				validate: {
-					len: [0, 20],
-				},
+				
 			},
 			email: {
 				type: DataTypes.STRING,
-				validate: {
-					isEmail: true,
-				},
+				
 			},
 		},
 		{
@@ -26,9 +22,6 @@ function connect(dbContext){
 		}
 	);
 }
-function modelBuilder(dbContext) {
-	connect(dbContext)
-	return Deportista.sync()
-}
+
 export default Deportista 
-export {modelBuilder as init,connect}
+export {connect}

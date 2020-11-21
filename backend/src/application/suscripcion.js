@@ -11,17 +11,17 @@ export default class Router {
         this.delete()
     }
     async getAll(){
-        this.router.get("/",[query('deportista','Introduzca un id valido').isInt()],async function(req,res){
+        this.router.get("/",[query('deportista','Introduzca un id valido').isInt()],async (req,res)=>{
             const errors  = validationResult(req)
             if(!errors.isEmpty()) res.status(400).send({errors:errors.array()})
-            res.status(200).send(await this.service.findAll(req.query.deportista))
+            res.status(200).send({data:await this.service.findAll(req.query.deportista),message:'Suscripciones',errors:[]} )
         })
     }
     async create(){
         this.router.post("/",[
             body('plan_id').notEmpty().toInt(),
             body('deportista_id').notEmpty().toInt()
-        ],async function(req,res){
+        ],async (req,res)=>{
             try {
                 const errors = validationResult(req)
                 if (!errors.isEmpty()){
@@ -36,10 +36,10 @@ export default class Router {
         })
     }
     async delete(){
-        this.router.delete("/:id",async function(req,res){
+        this.router.delete("/:id",async (req,res)=>{
             if (req.params.id){
                 await this.service.delete(req.params.id)
-                res.status(200).send({data:{id},message:'Se ha desuscrito con exito',errors:[] })
+                res.status(200).send({data:{id:req.params.id},message:'Se ha desuscrito con exito',errors:[] })
             } else res.status(400).send({errors:'El campo id es obligatorio'})
         })
     }

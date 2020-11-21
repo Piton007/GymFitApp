@@ -1,7 +1,7 @@
 import Sequalize from "./persistance/db"
-import Model,{connect} from "./domain/index"
-import {getServices} from "./services/index"
-import {getRouters} from "./application/index"
+import Model,{connect} from "./domain"
+import {getServices} from "./services"
+import {getRouters} from "./application"
 import Mapper from "./shared/mappers"
 import cors from "cors"
 import { config } from "dotenv"
@@ -9,8 +9,9 @@ import express from "express"
 config()
 const db = new Sequalize(process.env.DB_URI)
 db.getDBContext()
-.then((context)=>{
+.then(async (context)=>{
 connect(context)
+await context.sync()
 const services = getServices(Model,Mapper)
 const routers = getRouters(services)
 const app = express()

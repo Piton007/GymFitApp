@@ -1,5 +1,5 @@
 import Deportista from "./deportista"
-import { Model } from "sequelize";
+import { Model,DataTypes } from "sequelize";
 import Plan from "./plan"
 
 const TABLE_NAME = "suscripciones";
@@ -9,7 +9,7 @@ class Suscripcion extends Model {
 function connect(dbContext){
 	Suscripcion.init(
 		{
-            
+
 		},
 		{
 			sequelize: dbContext,
@@ -18,22 +18,14 @@ function connect(dbContext){
 	);
 	setUpRelations()
 }
-function modelBuilder(dbContext) {
-	connect(dbContext)
-	
-	return Suscripcion.sync()
-}
 
 function setUpRelations(){
-    
-    Suscripcion.belongsTo(Deportista,{
-		onDelete:'CASCADE'
-	})
-    Suscripcion.belongsTo(Plan,{
-		onDelete:'CASCADE'
-	})
+	Deportista.hasMany(Suscripcion)
+	Plan.hasMany(Suscripcion)
+    Suscripcion.belongsTo(Deportista, { onDelete: "CASCADE" })
+    Suscripcion.belongsTo(Plan, { onDelete: "CASCADE" })
 }
 
 export default Suscripcion
-export {modelBuilder as init,connect}
+export {connect}
 

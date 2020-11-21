@@ -23,7 +23,6 @@ export default class DeportistaService {
             },
             include:[
                 {
-                    as: 'suscripciones',
                     model:this.repository.Suscripcion
                 }
             ]

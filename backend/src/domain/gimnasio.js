@@ -2,22 +2,18 @@ import { DataTypes, Model } from "sequelize";
 
 const TABLE_NAME = "gimnasios";
 class Gimnasio extends Model {
-	
+   
 }
 function connect(dbContext){
 	Gimnasio.init(
 		{
 			name: {
 				type: DataTypes.STRING,
-				validate: {
-					len: [0, 20],
-				},
+				
 			},
 			email: {
 				type: DataTypes.STRING,
-				validate: {
-					isEmail: true,
-				},
+				
             },
             longitud:{
                 type:DataTypes.STRING,
@@ -35,9 +31,6 @@ function connect(dbContext){
 		}
 	);
 }
-function modelBuilder(dbContext) {
-	connect(dbContext)
-	return Gimnasio.sync()
-}
+
 export default Gimnasio
-export {modelBuilder as init,connect}
+export {connect}

@@ -4,8 +4,9 @@
         return {
             id:model.id,
             name:model.name,
-            email:string,
-            planes:  (model.planes) ? model.planes : []
+            email:model.email,
+            direccion:model.direccion,
+            planes:  (model.plans) ? model.plans.map(x=>PlanMapper.mapperToDTO(Object.assign({},{gimnasioId:model.id},x.dataValues))) : []
         }
     }
 }
@@ -16,7 +17,7 @@
         return {
             id:model.id,
             name:model.name,
-            email:string,
+            email:model.email,
             suscriptions: (model.suscripciones) ? model.suscripciones : []
         }
     }
@@ -28,22 +29,26 @@ class SuscripcionMapper {
     static mapperToDTO(model){
         return {
             id:model.id,
-            name:model.Plan.name,
-            descripcion:model.Plan.descripcion,
-            duracion:model.Plan.periodo,
-            precio:model.Plan.precio
+            gym:model.plan.gimnasio.name,
+            name:model.plan.name,
+            descripcion:model.plan.descripcion,
+            duracion:model.plan.periodo,
+            precio:model.plan.precio
         }
     }
 }
 
 class PlanMapper {
     static mapperToDTO(model){
+
         return {
             id:model.id,
+            cantidad:model.cantidad,
+            gimnasio_id:model.gimnasioId,
             name:model.name,
             descripcion:model.descripcion,
-            duracion:`${model.periodo} meses`,
-            precio: `S/${model.precio}`,
+            duracion:model.periodo,
+            precio: model.precio,
             availability: Number(model.cantidad > 0) 
         }
     }

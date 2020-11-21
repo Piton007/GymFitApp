@@ -7,25 +7,24 @@ export default class PlanService  {
     }
 
     async create(dto){
-        const plan = await this.repository.Plan.create(...dto)
+        const plan = await this.repository.Plan.create(dto)
         return {id:plan.id}
        
     }
 
     async delete(planId){
+        
         const plan = await this.repository.Plan.findByPk(planId)
         if (plan){
-            await plan.destroy()
+            await plan.destroy({force:true}) 
+        }else{
+            throw new Error("Plan Not Found")
         }
-        throw new Error("Plan Not Found")
+        
     }
 
-    async findAll(gimnasioId){
-        const Planes =  await this.repository.Plan.findAll({
-            where:{
-                gimnasioId
-            }
-        })
+    async findAll(){
+        const Planes =  await this.repository.Plan.findAll()
        return Planes.map(x=>this.mapper.Plan.mapperToDTO(x))
     }
 

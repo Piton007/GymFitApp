@@ -19,18 +19,18 @@ export default class GimnasioService {
         return gimnasios.map(this.mapper.Gimnasio.mapperToDTO)
 	}
 
-	async getByIdAndPopulatePlans() {
+	async getByIdAndPopulatePlans(id) {
 		const gimnasio = await this.repository.Gimnasio.findOne({
 			where: {
-				id,
+				"id":id
 			},
 			include: [
 				{
-					as: "planes",
 					model: this.repository.Plan,
 				},
 			],
 		});
+		
 		if (gimnasio) return this.mapper.Gimnasio.mapperToDTO(gimnasio);
 		throw new Error("Gimnasio Not Found");
 	}

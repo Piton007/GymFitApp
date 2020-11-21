@@ -11,7 +11,7 @@ class AuthDeportistaService {
                 email
             }
         })
-        if (auth) return Mapper.Deportista.mapperToDTO(auth)
+        if (auth) return this.mapper.Deportista.mapperToDTO(auth)
         throw new Error("Deportista Not Found")
     }
 }
@@ -27,7 +27,7 @@ class AuthGimnasioService {
                 email
             }
         })
-        if (auth) return Mapper.Gimnasio.mapperToDTO(auth)
+        if (auth) return this.mapper.Gimnasio.mapperToDTO(auth)
         throw new Error("Gimnasio Not Found")
     }
 }
