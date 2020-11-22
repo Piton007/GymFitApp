@@ -17,22 +17,23 @@ export default class SuscripcionService  {
     }
 
     async delete(suscriptionId){
-        const plan = await this.repository.Plan.findByPk(planId)
-        return this.repository.Suscripcion.destroy({
+        
+        const suscription = await this.repository.Suscripcion.findOne({
             where:{
                 id:suscriptionId
-            }
-        }).then((rows)=>{
-            if(rows === 1){
-                plan.cantidad += 1
-                await plan.save()
-                return suscriptionId
-            }
-                
-            else
-                throw new Error("Suscription Not Found")
+            },
+            include:[
+                {
+                    model:this.repository.Plan
+                }
+            ]
         })
-
+        if (suscription){
+            suscription.plan.cantidad += 1  
+            return Promise.all([suscription.destroy(),suscription.plan.save()])
+        }else{
+            throw new Error("Suscription Not Found")
+        }
        
     }
 

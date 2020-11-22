@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { Alert, ImageBackground as Image, Platform,  StyleSheet, View } from "react-native"
 import { ScrollView } from "react-native-gesture-handler";
-import { Divider, List, Text } from "react-native-paper";
+import { Divider, List, Text,Provider } from "react-native-paper";
 import Plan from "./planesNavigate"
+import {useDeportista} from "../hooks"
 import { getByIdAndPopulatePlans, GimnasioDTO } from "../network/gimnasio";
 import { NavigationProp, ParamListBase, Route, useNavigation} from "@react-navigation/native"
+
 
  interface GimnasioViewModel{
     gimnasioId:number,
@@ -52,6 +54,7 @@ interface Props {
 export default function({route}:Props){
     const {id,name} = route.params as Params
     const navigationHeader = useNavigation()
+    const [deportista,setDeportista] = useDeportista()
     const [gym,setGym] = useState<GimnasioViewModel>(nullable)
 
     function renderPlans(){
@@ -60,7 +63,7 @@ export default function({route}:Props){
                 <Text style={{fontSize:20,margin:10}}>Planes</Text>
                 {gym.planes.map(x=>(
             <View key={x.id}>
-                <Plan {...x} />
+                <Plan deportistaId={deportista.id} {...x}  />
                 <Divider />
             </View>))}
             </View>
@@ -88,6 +91,7 @@ export default function({route}:Props){
     },[])
 
     return (
+        <Provider>
         <ScrollView>
             <Image style={styles.container} source={{uri:'https://picsum.photos/700'}}/>
             <Text>
@@ -95,6 +99,7 @@ export default function({route}:Props){
             </Text>
             {renderPlans()}
         </ScrollView>
+        </Provider>
         
     )
 }

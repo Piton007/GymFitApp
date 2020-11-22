@@ -2,6 +2,7 @@ import React from 'react';
 import {Avatar, Card, Paragraph} from 'react-native-paper';
 
 export interface DeportistaViewModel {
+  id:number,
   name: string;
   email: string;
 }

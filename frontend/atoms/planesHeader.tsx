@@ -6,8 +6,11 @@ import AsyncStorage from '@react-native-community/async-storage';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { GYM_KEY, MyContext } from "../global";
 
+interface Props {
+    toggleFilter():void 
+}
 
-export function Gimnasio(){
+export function Gimnasio({toggleFilter}:Props){
     const [id,setId] = useState<number>(-1)
     const navigationHeader = useNavigation()
     
@@ -32,8 +35,46 @@ export function Gimnasio(){
     return(
         <View style={styles.header}>
             <Text style={styles.text} > Planes </Text>
+            <View style={styles.actions}>
+            <MaterialCommunityIcons style={styles.action} name="filter" color='#F5851B' onPress={toggleFilter} size={30} />
+                <MaterialCommunityIcons style={styles.action} name="plus-circle" color='#F5851B' onPress={()=>{navigationHeader?.navigate("CreatePlan",{gimnasioId:id})}} size={30} />
+            </View>
             
-                <MaterialCommunityIcons name="plus-circle" color='#F5851B' onPress={()=>{navigationHeader?.navigate("CreatePlan",{gimnasioId:id})}} size={30} />
+            
+        </View>
+        
+    )
+}
+
+export function Deportista({toggleFilter}:Props){
+    const [id,setId] = useState<number>(-1)
+    const navigationHeader = useNavigation()
+    
+    useEffect(()=>{
+        let suscribe = true
+        if(suscribe){
+            AsyncStorage.getItem(GYM_KEY).then((x:string | null) => {
+                if (x){
+                    
+                    const {id} = JSON.parse(x)
+                    setId(id as number)
+                }
+                
+            }); 
+           
+        }
+        return ()=>{
+            suscribe = false
+        }
+    },[])
+
+    return(
+        <View style={styles.header}>
+            <Text style={styles.text} > Planes </Text>
+            <View style={styles.actions}>
+            <MaterialCommunityIcons style={styles.action} name="filter" color='#F5851B' onPress={toggleFilter} size={30} />
+            </View>
+            
             
         </View>
         
@@ -49,6 +90,9 @@ const styles= StyleSheet.create({
         fontSize:24
     },
     actions:{
-        flex:1
+        flexDirection:'row'
+    },
+    action:{
+        marginHorizontal:5
     }
 })

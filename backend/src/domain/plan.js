@@ -38,6 +38,10 @@ function connect(dbContext) {
 				type: DataTypes.INTEGER,
 				defaultValue: 0,
 			},
+			descuento:{
+				type:DataTypes.INTEGER,
+				allowNull:true
+			}
 		},
 		{
 			sequelize: dbContext,

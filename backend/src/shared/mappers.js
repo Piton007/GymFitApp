@@ -45,6 +45,7 @@ class PlanMapper {
             id:model.id,
             cantidad:model.cantidad,
             gimnasio_id:model.gimnasioId,
+            descuento:model.descuento,
             name:model.name,
             descripcion:model.descripcion,
             duracion:model.periodo,

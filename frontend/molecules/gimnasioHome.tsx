@@ -7,6 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Info,{ GimnasioViewModel } from "../atoms/gimnasioInfo";
 import { SuscripcionViewModel } from "../atoms/suscripcion";
 import { GYM_KEY, MyContext } from "../global";
+import Header from "./homeHeader"
 
 import { GimnasioDTO } from "../network/gimnasio";
 
@@ -20,13 +21,7 @@ export default function({navigation}:any){
     const navigationHeader = useContext(MyContext)
     const [info,setInfo] = useState<GimnasioViewModel>({email:'null@gmail.com',name:'null'})
     
-    function logOut(){
-        
-        AsyncStorage.removeItem(GYM_KEY).then(() => {
-            navigationHeader?.navigate('Principal')
-           
-         }); 
-    }
+ 
 
     useEffect(()=>{
         let suscribe = true
@@ -40,7 +35,7 @@ export default function({navigation}:any){
           }); 
           navigation.addListener('focus',()=>{
               navigationHeader?.setOptions({
-                headerTitle:'Mi Gimnasio'
+                headerTitle: ()=>(<Header navigation={navigationHeader}/>)
             })
         })
         }
@@ -56,9 +51,6 @@ export default function({navigation}:any){
             <View style={{flex:1,flexGrow:1,flexBasis:250,marginVertical:8,marginHorizontal:8}}>
             <Info {...info} />
             </View> 
-            <Button style={{ marginVertical:4,backgroundColor:'#E22904'}} onPress={logOut}>
-               <Text style={{color:'#FFFFFF'}}>LogOut</Text>
-            </Button> 
         </ScrollView>
     )
 }

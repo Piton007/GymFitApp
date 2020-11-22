@@ -2,50 +2,36 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Alert, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {getByIdAndPopulatePlans} from '../network/gimnasio';
-import Plan from '../atoms/planes';
+import {Deportista as Plan} from '../atoms/planes';
 import FilterBar from './filterBar';
-import {ChipDismiss, GimnasioPlanHeader as Header} from '../atoms';
+import { Deportista as Header} from '../atoms/planesHeader';
 import {GYM_KEY, MyContext, NoDisponibleMsj} from '../global';
 import {PlanFilter} from '../organism/planFilter';
-import {deletePlan, PlanDTO} from '../network/planes';
+import {deletePlan, getAll, PlanDTO} from '../network/planes';
 
 import {
   useNavigation,
 } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
-import {Chip, Provider, Text} from 'react-native-paper';
+import { Provider, Text} from 'react-native-paper';
 
 
 
-export  default function (/* props:GimnasioDTO[] */) {
+export  default function  () {
   const [planes, setPlanes] = useState<PlanDTO[]>([]);
   const [filterDialog, setFilterDialog] = useState<boolean>(false);
   const [cost, setCost] = useState<number>(-1);
   const navigation = useNavigation();
   const navigationHeader = useContext(MyContext);
 
-  function deletes(index: number) {
-    deletePlan(index)
-      .then(() => {
-        setPlanes(planes.filter((x) => x.id !== index));
-      })
-      .catch((err) => {
-        Alert.alert(err.message);
-      });
-  }
 
   useEffect(() => {
     let suscribe = true;
     if (suscribe) {
       navigation.addListener('focus', () => {
-        AsyncStorage.getItem(GYM_KEY).then((x: string | null) => {
-          if (x) {
-            const {id} = JSON.parse(x);
-            getByIdAndPopulatePlans(id as number).then(({data}) => {
-              setPlanes(data?.planes || []);
+            getAll().then(({data}) => {
+              setPlanes(data || []);
             });
-          }
-        });
         navigationHeader?.setOptions({
           headerTitle: () => (
             <Header
@@ -81,9 +67,6 @@ export  default function (/* props:GimnasioDTO[] */) {
         <View key={x.id} style={{marginHorizontal: 8, marginVertical: 8}}>
           <Plan
             data={x}
-            deleteAction={() => {
-              deletes(x.id);
-            }}
           />
         </View>
       ));

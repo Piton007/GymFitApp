@@ -32,7 +32,7 @@ export default function(/* props:GimnasioDTO[] */{navigation}:any){
         })
         navigation.addListener('focus',()=>{
             navigationHeader.setOptions({
-              title:'Gimnasios'
+              headerTitle:'Gimnasios'
           })
       })
        }

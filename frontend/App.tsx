@@ -10,7 +10,7 @@
 
 import React from 'react';
 import Home from "./Login"
-import CreatePlan from "./organism/plan"
+import CreatePlan,{Edit as EditPlan} from "./organism/plan"
 import DeportistaLogin from "./atoms/deportistaLogin"
 import GymLogin from "./atoms/gimnasioLogin"
 import BottomNavigationBar from "./NavigationBar"
@@ -39,10 +39,12 @@ const App = () => {
             <Stack.Screen name="Principal" options={{headerShown:false}} component={Home}/>
             <Stack.Screen name="DeportistaLogin"  component={DeportistaLogin}/>
             <Stack.Screen name="CreatePlan" options={{headerTitle:"Crear Plan"}} component={CreatePlan} />
+            <Stack.Screen name="EditPlan" options={{headerTitle: "Plan"}} component={EditPlan} />
             <Stack.Screen name="DeportistaHome" component={BottomNavigationBar.Deportista}  />
             <Stack.Screen name="GymLogin"  component={GymLogin}/>
             <Stack.Screen name="AddSuscription" component={AddSuscription}/>
             <Stack.Screen name="GymHome" component={BottomNavigationBar.Gimnasio}  />
+          
           </Stack.Navigator>
         </NavigationContainer>
             

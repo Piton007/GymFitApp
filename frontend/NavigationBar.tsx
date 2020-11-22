@@ -8,6 +8,7 @@ import Planes from "./molecules/planes"
 import {GimnasioPlanHeader as Header} from "./atoms"
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import { MyContext } from './global';
+import DeportistaPlanes from "./molecules/planesDeportista"
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
@@ -53,13 +54,12 @@ function DeportistaHome () {
         <Tab.Screen name="DeportistaPerfil" options={{tabBarIcon:({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
           ),title:"Home"}} component={Home} />
+          <Tab.Screen name="DeportistaPlanes"  options={{tabBarIcon:({ color }) => (
+            <MaterialCommunityIcons name="karate" color={color} size={26} />
+          ),title:"Planes"}} component={DeportistaPlanes} />
         <Tab.Screen name="DeportistaGyms" options={{tabBarIcon:({ color }) => (
             <MaterialCommunityIcons name="weight" color={color} size={26} />
           ),title:"Gyms"}} component={Gimnasios} />
-        <Tab.Screen name="DeportistaEntrenamiento"  options={{tabBarIcon:({ color }) => (
-            <MaterialCommunityIcons name="karate" color={color} size={26} />
-          ),title:"Entrenamiento"}} component={Entrenamiento} />
-        
       </Tab.Navigator>
     </MyContext.Provider>
   );
