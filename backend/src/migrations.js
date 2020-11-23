@@ -27,6 +27,7 @@ function getArgs () {
 }
 const SEEDING = "data-seeding"
 const db = new Sequalize(process.env.DB_URI)
+
 const args = getArgs()
 
 db.getDBContext()
@@ -34,6 +35,7 @@ db.getDBContext()
    
  
    Migrations(context).then(()=>{
+      
       if(args[SEEDING]){
          connect(context)
          dataSeeding(context)
@@ -49,12 +51,14 @@ db.getDBContext()
  
 
 
-}).catch(console.log)
+}).catch((error)=>{
+   console.log(error)
+})
 
 
 
 function dataSeeding(context){
-  Promise.all(createGimnasios().concat(createDeportistas())).then(()=>{
+  Promise.all(createGimnasios().concat(createDeportistas()).concat(createMaquinas()).concat(createEntrenadores()).concat(createPlans())).then(()=>{
      console.log("Data seeded !")
      context.close()
   })
@@ -68,6 +72,16 @@ function createGimnasios(){
 }
 function createDeportistas(){
    return [ Model.Deportista.create({name:'Jose Luis',email:'josemowa@gmail.com'}),Model.Deportista.create({name:'Luis Jose',email:'josemowa2@gmail.com'})]
+}
+function createMaquinas(){
+   return [Model.Maquina.create({name:'Pesas',image:'pesas.jpg',gimnasioId:1}),Model.Maquina.create({name:'Curl Machine',image:'curl_machine.jpg',gimnasioId:1})]
+}
+function createEntrenadores(){
+   return [Model.Entrenador.create({name:'Zidane',image:'entrenador1.jpg',gimnasioId:1})]
+}
+
+function createPlans(){
+   return [Model.Plan.create({gimnasioId:1,name:"VIP",descripcion:"descipricon1",periodo:6,precio:220,cantidad:4})]
 }
 
 

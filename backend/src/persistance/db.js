@@ -12,6 +12,7 @@ export default class Persistance {
             await sequalize.authenticate()
             return sequalize
         } catch (error) {
+           
             console.log(error)
             process.exit(1)
         }

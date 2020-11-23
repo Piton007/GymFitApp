@@ -55,11 +55,35 @@ class PlanMapper {
     }
 }
 
+class EntrenadorMapper {
+    static mapperToDTO(model){
+
+        return {
+            id:model.id,
+            name:model.name,
+            image:model.image
+        }
+    }
+}
+
+class MaquinaMapper {
+    static mapperToDTO(model){
+
+        return {
+            id:model.id,
+            name:model.name,
+            image:model.image
+        }
+    }
+}
+
 export default {
     Deportista:DeportistaMapper,
     Gimnasio:GimnasioMapper,
     Suscripcion:SuscripcionMapper,
-    Plan:PlanMapper
+    Plan:PlanMapper,
+    Entrenador:EntrenadorMapper,
+    Maquina:MaquinaMapper
 }
 
 export {DeportistaMapper as Deportista, GimnasioMapper as Gimnasio}
