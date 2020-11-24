@@ -9,70 +9,48 @@
  */
 
 import React from 'react';
+import Home from "./Login"
+import CreatePlan,{Edit as EditPlan} from "./organism/plan"
+import DeportistaLogin from "./atoms/deportistaLogin"
+import GymLogin from "./atoms/gimnasioLogin"
+import BottomNavigationBar from "./NavigationBar"
+import AddSuscription from "./molecules/addSuscription"
+import Scratch from "./Scratch"
 import {
   SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
+  StyleSheet
 } from 'react-native';
 
 import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
+  Colors
 } from 'react-native/Libraries/NewAppScreen';
+import { NavigationContainer, StackActions, useNavigation } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 declare const global: {HermesInternal: null | {}};
+const Stack = createStackNavigator();
 
 const App = () => {
+  
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+
+        <NavigationContainer>
+
+          <Stack.Navigator initialRouteName="Principal">
+            <Stack.Screen name="Principal" options={{headerShown:false}} component={Home}/>
+            <Stack.Screen name="DeportistaLogin" options={{headerTitle:"Deportista"}} component={DeportistaLogin}/>
+            <Stack.Screen name="CreatePlan" options={{headerTitle:"Crear Plan"}} component={CreatePlan} />
+            <Stack.Screen name="EditPlan" options={{headerTitle: "Plan"}} component={EditPlan} />
+            <Stack.Screen name="DeportistaHome" component={BottomNavigationBar.Deportista}  />
+            <Stack.Screen name="GymLogin"  options={{headerTitle:"Gimnasio"}}  component={GymLogin}/>
+            <Stack.Screen name="AddSuscription" component={AddSuscription}/>
+            <Stack.Screen name="GymHome" component={BottomNavigationBar.Gimnasio}  />
+            <Stack.Screen name ="Scratch" component={Scratch}/>
+          </Stack.Navigator>
+        </NavigationContainer>
+            
+
+
   );
 };
 

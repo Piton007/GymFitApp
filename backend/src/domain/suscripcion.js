@@ -1,35 +1,38 @@
 import Deportista from "./deportista"
 import { Model } from "sequelize";
+import Entrenador from "./entrenador"
+import Maquina from "./maquina"
 import Plan from "./plan"
 
-class Suscripcion extends Model {
-	static TABLE_NAME = "suscripciones";
-}
 
-function modelBuilder(dbContext) {
+
+
+const TABLE_NAME = "suscripciones";
+class Suscripcion extends Model {
+
+}
+function connect(dbContext){
 	Suscripcion.init(
 		{
-            
+
 		},
 		{
 			sequelize: dbContext,
-			modelName: Suscripcion.TABLE_NAME,
+			modelName: TABLE_NAME,
 		}
-    );
-    setUpRelations()
+	);
+	setUpRelations()
 }
 
 function setUpRelations(){
-    Plan.hasMany(Suscripcion)
-    Deportista.hasMany(Suscripcion)
-    Suscripcion.belongsTo(Deportista,{
-		onDelete:'CASCADE'
-	})
-    Suscripcion.belongsTo(Plan,{
-		onDelete:'CASCADE'
-	})
+	Deportista.hasMany(Suscripcion)
+	Plan.hasMany(Suscripcion)
+	Entrenador.hasMany(Suscripcion)
+	Suscripcion.belongsTo(Entrenador,{onDelete:"CASCADE",foreignKey:'entrenadorId'})
+    Suscripcion.belongsTo(Deportista, { onDelete: "CASCADE" })
+    Suscripcion.belongsTo(Plan, { onDelete: "CASCADE" })
 }
 
 export default Suscripcion
-export {modelBuilder as init}
+export {connect}
 

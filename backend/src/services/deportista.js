@@ -11,7 +11,7 @@ export default class DeportistaService {
     async getById(id){
         const deportista =  await this.repository.Deportista.findByPk(id)
         if(deportista){
-            return Mapper.mapperToDTO(deportista)
+            return Mapper.Deportista.mapperToDTO(deportista)
         }
         throw new Error('Deportista Not Found')
     }
@@ -23,12 +23,11 @@ export default class DeportistaService {
             },
             include:[
                 {
-                    as: 'suscripciones',
                     model:this.repository.Suscripcion
                 }
             ]
         })
-        if(deportista) return Mapper.mapperToDTO(deportista)
+        if(deportista) return Mapper.Deportista.mapperToDTO(deportista)
         throw new Error('Deportista Not Found')
         
     }

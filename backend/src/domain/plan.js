@@ -1,11 +1,13 @@
 import { DataTypes, Model } from "sequelize";
-import Gimmnasio from "./gimnasio"
+import Gimmnasio from "./gimnasio";
 
+const TABLE_NAME = "plans";
 class Plan extends Model {
-	static TABLE_NAME = "planes";
-}
 
-function modelBuilder(dbContext) {
+
+
+}
+function connect(dbContext) {
 	Plan.init(
 		{
 			name: {
@@ -14,42 +16,50 @@ function modelBuilder(dbContext) {
 					len: [0, 20],
 				},
 			},
-			descripcion:{
-				type:DataTypes.STRING,
-				validate:{
-					len:[0,100]
-				}
+			descripcion: {
+				type: DataTypes.STRING,
+				validate: {
+					len: [0, 100],
+				},
 			},
-			precio:{
-				type:DataTypes.DECIMAL,
-				validate:{
-					isDecimal:true
-				}
-
+			periodo: {
+				type: DataTypes.INTEGER,
+				validate: {
+					min: 1,
+				},
 			},
-			cantidad:{
+			precio: {
+				type: DataTypes.DECIMAL,
+				validate: {
+					isDecimal: true,
+				},
+			},
+			cantidad: {
+				type: DataTypes.INTEGER,
+				defaultValue: 0,
+			},
+			descuento:{
 				type:DataTypes.INTEGER,
-				defaultValue:0
+				allowNull:true
 			}
 		},
 		{
 			sequelize: dbContext,
-			modelName: Plan.TABLE_NAME,
+			modelName: TABLE_NAME,
 		}
 	);
-	
-	Plan.prototype.isAvailable = function(){
-		return this.cantidad > 0
-	}
-	setUpRelations()
-	
+
+	Plan.prototype.isAvailable = function () {
+		return this.cantidad > 0;
+	};
+	setUpRelations();
 }
 
-function setUpRelations(){
-    Gimmnasio.hasMany(Plan)
-    Plan.belongsTo(Gimmnasio,{onDelete:'CASCADE'})
+
+function setUpRelations() {
+	Gimmnasio.hasMany(Plan)
+	Plan.belongsTo(Gimmnasio, { onDelete: "CASCADE" });
 }
 
-export default Plan
-export {modelBuilder as init}
-
+export default Plan;
+export {connect };

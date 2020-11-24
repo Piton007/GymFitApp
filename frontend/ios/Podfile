@@ -8,6 +8,10 @@ target 'GymFitApp' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+  pod 'react-native-slider', :path => '../node_modules/@react-native-community/slider'
+
   target 'GymFitAppTests' do
     inherit! :complete
     # Pods for testing
