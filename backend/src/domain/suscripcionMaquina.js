@@ -24,8 +24,8 @@ function connect(dbContext){
 }
 
 function setUpRelations(){
-	Suscripcion.hasMany(SuscripcionMaquinas)
-	Maquina.hasMany(SuscripcionMaquinas)
+	Suscripcion.hasMany(SuscripcionMaquinas,{foreignKey:'suscripcionId'})
+	Maquina.hasMany(SuscripcionMaquinas,{foreignKey:'maquinaId'})
     SuscripcionMaquinas.belongsTo(Suscripcion,{onDelete:"CASCADE",foreignKey:'suscripcionId'})
     SuscripcionMaquinas.belongsTo(Maquina,{onDelete:"CASCADE",foreignKey:'maquinaId'})
 }

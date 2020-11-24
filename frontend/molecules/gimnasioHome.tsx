@@ -7,6 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Info,{ GimnasioViewModel } from "../atoms/gimnasioInfo";
 import { SuscripcionViewModel } from "../atoms/suscripcion";
 import { GYM_KEY, MyContext } from "../global";
+import Entrenadores from "../organism/Entrenadores"
 import Header from "./homeHeader"
 
 import { GimnasioDTO } from "../network/gimnasio";
@@ -19,7 +20,7 @@ function buildViewModel(gimnasio:GimnasioDTO):GimnasioViewModel{
 
 export default function({navigation}:any){
     const navigationHeader = useContext(MyContext)
-    const [info,setInfo] = useState<GimnasioViewModel>({email:'null@gmail.com',name:'null'})
+    const [info,setInfo] = useState<GimnasioViewModel>({id:-1,email:'null@gmail.com',name:'null'})
     
  
 
@@ -50,7 +51,11 @@ export default function({navigation}:any){
         <ScrollView>
             <View style={{flex:1,flexGrow:1,flexBasis:250,marginVertical:8,marginHorizontal:8}}>
             <Info {...info} />
-            </View> 
+            </View>{
+                info.id !== -1 &&
+                <Entrenadores gimnasioId={info.id} />
+            }
+            
         </ScrollView>
     )
 }

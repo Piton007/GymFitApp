@@ -11,7 +11,7 @@ export function useEntrenadores(gimnasioId:number){
         let suscribe = true
         if (suscribe){
             getAll(gimnasioId).then((x)=>{
-                console.log(x)
+                
                 setEntrenadores(x.data||[])
             })
         }   

@@ -42,7 +42,6 @@ export default class Router {
 
     async update(){
         this.router.put("/:id",[
-            body('plan_id').notEmpty().toInt(),
             body('entrenador_id').notEmpty().toInt(),
             body('maquinas').notEmpty().isArray()
         ],async (req,res)=>{

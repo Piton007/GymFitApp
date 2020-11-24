@@ -29,6 +29,9 @@ class SuscripcionMapper {
     static mapperToDTO(model){
         return {
             id:model.id,
+            entrenadorId:model.entrenadorId,
+            maquinas:model.suscripcion_maquinas.map(x=>x.maquinaId),
+            gimnasioId:model.plan.gimnasio.id,
             gym:model.plan.gimnasio.name,
             name:model.plan.name,
             descripcion:model.plan.descripcion,

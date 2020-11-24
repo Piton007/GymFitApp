@@ -55,12 +55,17 @@ export default class SuscripcionService  {
             include:[
                 {
                     model:this.repository.Plan,include:[this.repository.Gimnasio]
+                },{
+                    model:this.repository.SuscripcionMaquinas,
+                    attributes:["maquinaId"]
                 }
             ]
         })
 
        return suscripciones.map(x=>this.mapper.Suscripcion.mapperToDTO(x))
     }
+
+   
 
     updateMaquinas(suscripcionId,maquinasId){
         const deleteMaquinas =  this.repository.SuscripcionMaquinas.destroy({

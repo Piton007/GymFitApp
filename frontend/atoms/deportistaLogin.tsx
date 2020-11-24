@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Alert, Button, View} from 'react-native';
-import {TextInput} from 'react-native-paper';
+import {Avatar, TextInput} from 'react-native-paper';
 import {Deportista as API} from '../network/auth';
 import {GymFitButton} from './Buttons';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -29,8 +29,14 @@ export default function Deportista() {
   }
 
   return (
-    <View style={{flex: 1, justifyContent: 'center'}}>
-      <View style={{marginVertical: 16,alignItems:'center'}}>
+    <View style={{flex: 1, justifyContent: 'flex-start'}}>
+      <View style={{marginVertical: 16, alignItems: 'center' }}>
+        <View style={{justifyContent: 'center', alignItems: 'center',marginVertical:20}}>
+          <Avatar.Image
+            size={130}
+            source={require('../assets/deportista_login.jpg')}
+          />
+        </View>
         <Input
           label="Email"
           autoFocus

@@ -25,6 +25,7 @@ interface EntrenadorDTO {
 
 
 export default  ({data, onChange, value,width=200}: Props) => {
+  console.log("Heeeeeeeey"+JSON.stringify(data))
     const [visible, setVisible] = React.useState(false);
   
     const openMenu = () => setVisible(true);
@@ -46,7 +47,7 @@ export default  ({data, onChange, value,width=200}: Props) => {
           anchor={
             <TouchableRipple onPress={openMenu}>
               <View style={styles.anchor}>
-                <Standard entrenador={data.find(x=>value == x.id)!} />
+                <Standard entrenador={data.find(x=>value === x.id)!} />
               </View>
             </TouchableRipple>
           }>

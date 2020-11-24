@@ -11,7 +11,7 @@ export default class EntrenadorService {
 		if (entrenador) {
             await entrenador.destroy()
 		}
-		throw new Error("entrenador Not Found");
+		else throw new Error("entrenador Not Found");
 	}
 
 	async getAllByGimnasioId(gimnasioId) {

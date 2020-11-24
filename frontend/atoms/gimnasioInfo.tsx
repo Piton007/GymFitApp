@@ -2,6 +2,7 @@ import React from "react"
 import { Avatar, Card } from "react-native-paper"
 
 export interface GimnasioViewModel {
+  id:number;
     name: string;
     email: string;
   }

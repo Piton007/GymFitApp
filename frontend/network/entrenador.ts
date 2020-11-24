@@ -14,3 +14,11 @@ export interface EntrenadorDTO {
         ...headers
     }).then(x=>x.json())
 }
+
+
+export function deleteEntrenador(entrenadorId:number):Promise<ApiResp<number>>{
+    return fetch(`${API_URL}/entrenadores/${entrenadorId}`,{
+        method:'DELETE',
+        ...headers   
+    }).then(x=>x.json())
+}

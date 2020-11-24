@@ -38,11 +38,11 @@ const App = () => {
 
           <Stack.Navigator initialRouteName="Principal">
             <Stack.Screen name="Principal" options={{headerShown:false}} component={Home}/>
-            <Stack.Screen name="DeportistaLogin"  component={DeportistaLogin}/>
+            <Stack.Screen name="DeportistaLogin" options={{headerTitle:"Deportista"}} component={DeportistaLogin}/>
             <Stack.Screen name="CreatePlan" options={{headerTitle:"Crear Plan"}} component={CreatePlan} />
             <Stack.Screen name="EditPlan" options={{headerTitle: "Plan"}} component={EditPlan} />
             <Stack.Screen name="DeportistaHome" component={BottomNavigationBar.Deportista}  />
-            <Stack.Screen name="GymLogin"  component={GymLogin}/>
+            <Stack.Screen name="GymLogin"  options={{headerTitle:"Gimnasio"}}  component={GymLogin}/>
             <Stack.Screen name="AddSuscription" component={AddSuscription}/>
             <Stack.Screen name="GymHome" component={BottomNavigationBar.Gimnasio}  />
             <Stack.Screen name ="Scratch" component={Scratch}/>
