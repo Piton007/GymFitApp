@@ -15,6 +15,7 @@ import DeportistaLogin from "./atoms/deportistaLogin"
 import GymLogin from "./atoms/gimnasioLogin"
 import BottomNavigationBar from "./NavigationBar"
 import AddSuscription from "./molecules/addSuscription"
+import Scratch from "./Scratch"
 import {
   SafeAreaView,
   StyleSheet
@@ -44,7 +45,7 @@ const App = () => {
             <Stack.Screen name="GymLogin"  component={GymLogin}/>
             <Stack.Screen name="AddSuscription" component={AddSuscription}/>
             <Stack.Screen name="GymHome" component={BottomNavigationBar.Gimnasio}  />
-          
+            <Stack.Screen name ="Scratch" component={Scratch}/>
           </Stack.Navigator>
         </NavigationContainer>
             

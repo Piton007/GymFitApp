@@ -19,7 +19,7 @@ const app = express()
 
 app.use(cors({ origin: "*", credentials: true }))
 app.use(express.json())
-
+app.use("/static",express.static(__dirname+process.env.PhotosFolder))
  app.use(function(req,res,next){
     const key = req.headers.api_key || ""
     if (process.env.API_KEY === key ){
@@ -31,7 +31,7 @@ app.use(express.json())
 
 
 
-app.use("/static",express.static(__dirname+process.env.PhotosFolder))
+
  app.use("/authDeportista",routers.AuthDeportista)
 app.use("/authGimnasio",routers.AuthGimnasio)
 app.use("/gimnasios",routers.Gimnasio)

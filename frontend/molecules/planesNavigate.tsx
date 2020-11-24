@@ -1,43 +1,61 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-paper';
 import {GymFitButton} from '../atoms';
 import {Successful} from './dialogs';
 import {create} from '../network/suscripcion';
+import { useEntrenadores } from '../hooks/entrenador';
+import { useMaquinas } from '../hooks/maquina';
+import CreateSuscripcion from "../templates/CreateSuscripcion"
+import { useNavigation } from '@react-navigation/native';
 
 interface Props {
   deportistaId: number;
   id: number;
+  gimnasioId:number
   precio: number;
+  periodo:number,
   cantidad: number;
   availability: boolean;
 }
 
 export default function (plan: Props) {
   const [visible, setVisible] = useState(false);
-  const [msg,setMsg] = useState("")
+  const navigation = useNavigation()
+  const entrenadores = useEntrenadores(plan.gimnasioId)
+  const maquinas = useMaquinas(plan.gimnasioId)
+  const [entrenadorId,setEntrenadorId] = useState<number>(0)
+  const [maquinaIds,setMaquinasIds] = useState<Set<number>>(new Set([]))
 
   function hideDialog() {
     setVisible(false);
   }
+  useEffect(()=>{
+    let suscribe = true
+    if(suscribe ){
+      if(entrenadores.length > 0){
+        setEntrenadorId(entrenadores[0].id)
+    }
+    }
+    return ()=>{suscribe  = false}
+  },[entrenadores])
 
   function suscribe() {
-    create(plan.id, plan.deportistaId).then((x) => {
-        setMsg(x.message)
-        setVisible(true)
+    create({planId:plan.id,deportistaId:plan.deportistaId,entrenadorId,maquinaIds:Array.from(maquinaIds)}).then((x) => {
+        
+        setVisible(false)
+        navigation.navigate('DeportistaPerfil')
     });
   }
 
   return (
     <View style={styles.container}>
-      <Successful hideDialog={hideDialog} visible={visible} msg={msg} /> 
-      <Text style={styles.periodo}> {plan.cantidad} meses </Text>
+      <CreateSuscripcion hideDialog={hideDialog} onSubmit={suscribe} visible={visible} title={"Create Suscripcion"} entrenadorId={entrenadorId} entrenadores={entrenadores} maquinaIds={maquinaIds} maquinas={maquinas} setEntrenadorId={setEntrenadorId} setMaquinaIds={setMaquinasIds} /> 
+      <Text style={styles.periodo}> {plan.periodo} meses </Text>
       <Text style={styles.periodo}>$ {plan.precio} </Text>
       <GymFitButton
         disabled={!plan.availability}
-        onPress={() => {
-          suscribe();
-        }}>
+        onPress={()=>{setVisible(true)}}>
         Suscribete
       </GymFitButton>
     </View>

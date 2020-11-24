@@ -63,7 +63,7 @@ export default function({route}:Props){
                 <Text style={{fontSize:20,margin:10}}>Planes</Text>
                 {gym.planes.map(x=>(
             <View key={x.id}>
-                <Plan deportistaId={deportista.id} {...x}  />
+                <Plan deportistaId={deportista.id} periodo={x.duracion} gimnasioId={id} {...x}  />
                 <Divider />
             </View>))}
             </View>
